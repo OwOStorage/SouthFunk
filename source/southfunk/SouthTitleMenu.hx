@@ -1,4 +1,4 @@
-package;
+package southfunk;
 
 #if desktop
 import sys.thread.Thread;
@@ -49,7 +49,7 @@ typedef TitleData =
 	backgroundSprite:String,
 	bpm:Int
 }
-class TitleState extends MusicBeatState
+class SouthTitleMenu extends MusicBeatState
 {
 	public static var muteKeys:Array<FlxKey> = [FlxKey.ZERO];
 	public static var volumeDownKeys:Array<FlxKey> = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
@@ -201,21 +201,14 @@ class TitleState extends MusicBeatState
 		#elseif CHARTING
 		MusicBeatState.switchState(new ChartingState());
 		#else
-		if(FlxG.save.data.flashing == null && !FlashingState.leftState) {
-			FlxTransitionableState.skipNextTransIn = true;
-			FlxTransitionableState.skipNextTransOut = true;
-			MusicBeatState.switchState(new FlashingState());
-		} else {
 			if (initialized)
 				startIntro();
-			else
-			{
+			else{
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
 					startIntro();
 				});
 			}
-		}
 		#end
 	}
 
@@ -496,7 +489,7 @@ class TitleState extends MusicBeatState
 					if (mustUpdate) {
 						MusicBeatState.switchState(new OutdatedState());
 					} else {
-						MusicBeatState.switchState(new MainMenuState());
+						MusicBeatState.switchState(new southfunk.SouthMainMenu());
 					}
 					closedState = true;
 				});
