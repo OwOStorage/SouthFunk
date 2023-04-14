@@ -12,6 +12,7 @@ import flixel.effects.FlxFlicker;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
+import flixel.util.FlxTimer;
 import flixel.math.FlxMath;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -186,9 +187,13 @@ class SouthMainMenu extends MusicBeatState
 			if (controls.ACCEPT)
 			{
 
+					// funi cmake sure thinf
+					arrow.alpha = 1;
+
 					selectedSomethin = true;
 					FlxG.sound.play(Paths.sound('confirmMenu'));
 
+					FlxTween.tween(arrow, { alpha: 0 }, 0.4, { ease: FlxEase.cubeInOut });
 
 					menuItems.forEach(function(spr:FlxSprite)
 					{
@@ -204,9 +209,17 @@ class SouthMainMenu extends MusicBeatState
 						}
 						else
 						{
-							FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
-							{
-								imOpenState();
+							//FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
+							//{
+							//	imOpenState();
+							//});
+
+							FlxTween.tween(spr, { alpha: 0 }, 0.4, { 
+								ease: FlxEase.cubeInOut ,
+								onComplete: function(twn:FlxTween)
+									{	
+										imOpenState();
+									}
 							});
 						}
 					});
